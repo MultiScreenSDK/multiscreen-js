@@ -2,7 +2,7 @@
 # JavaScript API Overview
 
 Samsung MultiScreen allows you to connect mobile devices and SmartTVs. By using the MultiScreen API you can create compelling experiences that extend mobile applications to a Samsung SmartTV. The JavaScript API can be used in your SmartTV application to enable mobile applications to discover, connect, and communicate with the SmartTV. This API can also be used in web applications,
-along with [iOS](https://github.com/MultiScreenSDK/multiscreen-ios) and [Android](https://github.com/MultiScreenSDK/multiscreen-android).
+along with [Android](https://github.com/MultiScreenSDK/multiscreen-android). iOS coming soon.
 
 ###### For more general information : [MultiScreen WebSite](http://multiscreen.samsung.com )
 ###### For more detailed API documentation : [JS API Docs](docs/api.md)
