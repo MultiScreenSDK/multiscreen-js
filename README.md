@@ -168,7 +168,7 @@ app.on('say', function(msg, fromClient){
 
 ## Additional Documentation & Client APIs
 
-  * [MultiScreen Website](http://mutiscreen.samsung.com/)
+  * [MultiScreen Website](http://multiscreen.samsung.com/)
   * [JS API Docs](https://github.com/MultiScreenSDK/multiscreen-js)
   * [Android API](https://github.com/MultiScreenSDK/multiscreen-android)
 
