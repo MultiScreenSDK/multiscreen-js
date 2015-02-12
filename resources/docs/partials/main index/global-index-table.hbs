@@ -1,0 +1,8 @@
+{{#globals sortBy=(option "sort-by") ~}}
+{{#if @first~}}
+{{>heading-indent}}Globals
+| Global | Description |
+| ------ | ----------- |
+{{/if~}}
+| {{#if deprecated}}~~{{/if}}[{{>index-name2}}](#{{{anchorName}}}){{>return-sig}}{{>name-suffix~}}{{#if deprecated}}~~{{/if}} | {{{stripNewlines (linkify description)}}} |
+{{/globals}}

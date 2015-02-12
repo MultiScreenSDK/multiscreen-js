@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>api</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <style type="text/css">
+
+        /* RESET
+        =============================================================================*/
+
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        /* BODY
+        =============================================================================*/
+
+        body {
+            font-family: Helvetica, arial, freesans, clean, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #FDFDFD;
+            padding: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        body>*:first-child {
+            margin-top: 0 !important;
+        }
+
+        body>*:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        /* BLOCKS
+        =============================================================================*/
+
+        p, blockquote, ul, ol, dl, table, pre {
+            margin: 15px 0;
+        }
+
+        /* HEADERS
+        =============================================================================*/
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 20px 0 10px;
+            padding: 0;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+            font-size: inherit;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            color: #000;
+            margin-top: 60px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-top : 40px;
+        }
+
+        h4 {
+            font-size: 16px;
+        }
+
+        h5 {
+            font-size: 14px;
+        }
+
+        h6 {
+            color: #777;
+            font-size: 14px;
+        }
+
+        body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+            margin-top: 10px;
+        }
+
+        /* LINKS
+        =============================================================================*/
+
+        a {
+            color: #4183C4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* LISTS
+        =============================================================================*/
+
+        ul, ol {
+            padding-left: 30px;
+        }
+
+        ul li > :first-child,
+        ol li > :first-child,
+        ul li ul:first-of-type,
+        ol li ol:first-of-type,
+        ul li ol:first-of-type,
+        ol li ul:first-of-type {
+            margin-top: 0px;
+        }
+
+        ul ul, ul ol, ol ol, ol ul {
+            margin-bottom: 0;
+        }
+
+        dl {
+            padding: 0;
+        }
+
+        dl dt {
+            font-size: 14px;
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+        dl dt:first-child {
+            padding: 0;
+        }
+
+        dl dt>:first-child {
+            margin-top: 0px;
+        }
+
+        dl dt>:last-child {
+            margin-bottom: 0px;
+        }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+        dl dd>:first-child {
+            margin-top: 0px;
+        }
+
+        dl dd>:last-child {
+            margin-bottom: 0px;
+        }
+
+        /* NAV
+        =============================================================================*/
+
+        #nav{
+            width: 25%;
+            height: 300px;
+            float: right;
+        }
+
+        #toc{
+            position: fixed;
+            padding: 20px;
+            margin-left: 20px;
+        }
+
+        #nav dd{
+            display:none;
+        }
+
+        #nav a{
+
+            font-size: 14px;
+            font-weight: bold;
+            font-style :normal;
+        }
+
+        #content{
+            float: left;
+            width: 75%;
+            min-width: 600px;
+        }
+
+        #footer{
+            clear: both;
+        }
+
+        /* CODE
+        =============================================================================*/
+
+        pre, code, tt {
+            font-size: 12px;
+            font-family: Consolas, "Liberation Mono", Courier, monospace;
+        }
+
+        code, tt {
+            margin: 0 0px;
+            padding: 0px 0px;
+            white-space: nowrap;
+            border: 1px solid #eaeaea;
+            border-radius: 3px;
+        }
+
+        pre>code {
+            margin: 0;
+            padding: 0;
+            white-space: pre;
+            border: none;
+            background: transparent;
+        }
+
+        pre {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            line-height: 19px;
+            overflow: auto;
+            padding: 6px;
+            border-radius: 3px;
+        }
+
+        pre code, pre tt {
+            background-color: transparent;
+            border: none;
+        }
+
+        kbd {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            background-color: #DDDDDD;
+            background-image: linear-gradient(#F1F1F1, #DDDDDD);
+            background-repeat: repeat-x;
+            border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+            border-image: none;
+            border-radius: 2px 2px 2px 2px;
+            border-style: solid;
+            border-width: 1px;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            line-height: 10px;
+            padding: 1px 4px;
+        }
+
+        /* QUOTES
+        =============================================================================*/
+
+        blockquote {
+            border-left: 4px solid #DDD;
+            padding: 0 15px;
+            color: #777;
+        }
+
+        blockquote>:first-child {
+            margin-top: 0px;
+        }
+
+        blockquote>:last-child {
+            margin-bottom: 0px;
+        }
+
+        /* HORIZONTAL RULES
+        =============================================================================*/
+
+        hr {
+            clear: both;
+            margin: 15px 0;
+            height: 0px;
+            overflow: hidden;
+            border: none;
+            background: transparent;
+            border-bottom: 4px solid #ddd;
+            padding: 0;
+        }
+
+        /* TABLES
+        =============================================================================*/
+
+        table th {
+            font-weight: bold;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 6px 13px;
+        }
+
+        table tr {
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+
+        table tr:nth-child(2n) {
+            background-color: #f8f8f8;
+        }
+
+        /* IMAGES
+        =============================================================================*/
+
+        img {
+            max-width: 100%
+        }
+    </style>
+    <style type="text/css">
+        .highlight  { background: #ffffff; }
+        .highlight .c { color: #999988; font-style: italic } /* Comment */
+        .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+        .highlight .k { font-weight: bold } /* Keyword */
+        .highlight .o { font-weight: bold } /* Operator */
+        .highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+        .highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+        .highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+        .highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+        .highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+        .highlight .gd .x { color: #000000; background-color: #ffaaaa } /* Generic.Deleted.Specific */
+        .highlight .ge { font-style: italic } /* Generic.Emph */
+        .highlight .gr { color: #aa0000 } /* Generic.Error */
+        .highlight .gh { color: #999999 } /* Generic.Heading */
+        .highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+        .highlight .gi .x { color: #000000; background-color: #aaffaa } /* Generic.Inserted.Specific */
+        .highlight .go { color: #888888 } /* Generic.Output */
+        .highlight .gp { color: #555555 } /* Generic.Prompt */
+        .highlight .gs { font-weight: bold } /* Generic.Strong */
+        .highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+        .highlight .gt { color: #aa0000 } /* Generic.Traceback */
+        .highlight .kc { font-weight: bold } /* Keyword.Constant */
+        .highlight .kd { font-weight: bold } /* Keyword.Declaration */
+        .highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+        .highlight .kr { font-weight: bold } /* Keyword.Reserved */
+        .highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+        .highlight .m { color: #009999 } /* Literal.Number */
+        .highlight .s { color: #d14 } /* Literal.String */
+        .highlight .na { color: #008080 } /* Name.Attribute */
+        .highlight .nb { color: #0086B3 } /* Name.Builtin */
+        .highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+        .highlight .no { color: #008080 } /* Name.Constant */
+        .highlight .ni { color: #800080 } /* Name.Entity */
+        .highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+        .highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+        .highlight .nn { color: #555555 } /* Name.Namespace */
+        .highlight .nt { color: #000080 } /* Name.Tag */
+        .highlight .nv { color: #008080 } /* Name.Variable */
+        .highlight .ow { font-weight: bold } /* Operator.Word */
+        .highlight .w { color: #bbbbbb } /* Text.Whitespace */
+        .highlight .mf { color: #009999 } /* Literal.Number.Float */
+        .highlight .mh { color: #009999 } /* Literal.Number.Hex */
+        .highlight .mi { color: #009999 } /* Literal.Number.Integer */
+        .highlight .mo { color: #009999 } /* Literal.Number.Oct */
+        .highlight .sb { color: #d14 } /* Literal.String.Backtick */
+        .highlight .sc { color: #d14 } /* Literal.String.Char */
+        .highlight .sd { color: #d14 } /* Literal.String.Doc */
+        .highlight .s2 { color: #d14 } /* Literal.String.Double */
+        .highlight .se { color: #d14 } /* Literal.String.Escape */
+        .highlight .sh { color: #d14 } /* Literal.String.Heredoc */
+        .highlight .si { color: #d14 } /* Literal.String.Interpol */
+        .highlight .sx { color: #d14 } /* Literal.String.Other */
+        .highlight .sr { color: #009926 } /* Literal.String.Regex */
+        .highlight .s1 { color: #d14 } /* Literal.String.Single */
+        .highlight .ss { color: #990073 } /* Literal.String.Symbol */
+        .highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+        .highlight .vc { color: #008080 } /* Name.Variable.Class */
+        .highlight .vg { color: #008080 } /* Name.Variable.Global */
+        .highlight .vi { color: #008080 } /* Name.Variable.Instance */
+        .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+        .pl-c {
+            color: #969896;
+        }
+
+        .pl-c1,.pl-mdh,.pl-mm,.pl-mp,.pl-mr,.pl-s1 .pl-v,.pl-s3,.pl-sc,.pl-sv {
+            color: #0086b3;
+        }
+
+        .pl-e,.pl-en {
+            color: #795da3;
+        }
+
+        .pl-s1 .pl-s2,.pl-smi,.pl-smp,.pl-stj,.pl-vo,.pl-vpf {
+            color: #333;
+        }
+
+        .pl-ent {
+            color: #63a35c;
+        }
+
+        .pl-k,.pl-s,.pl-st {
+            color: #a71d5d;
+        }
+
+        .pl-pds,.pl-s1,.pl-s1 .pl-pse .pl-s2,.pl-sr,.pl-sr .pl-cce,.pl-sr .pl-sra,.pl-sr .pl-sre,.pl-src,.pl-v {
+            color: #df5000;
+        }
+
+        .pl-id {
+            color: #b52a1d;
+        }
+
+        .pl-ii {
+            background-color: #b52a1d;
+            color: #f8f8f8;
+        }
+
+        .pl-sr .pl-cce {
+            color: #63a35c;
+            font-weight: bold;
+        }
+
+        .pl-ml {
+            color: #693a17;
+        }
+
+        .pl-mh,.pl-mh .pl-en,.pl-ms {
+            color: #1d3e81;
+            font-weight: bold;
+        }
+
+        .pl-mq {
+            color: #008080;
+        }
+
+        .pl-mi {
+            color: #333;
+            font-style: italic;
+        }
+
+        .pl-mb {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .pl-md,.pl-mdhf {
+            background-color: #ffecec;
+            color: #bd2c00;
+        }
+
+        .pl-mdht,.pl-mi1 {
+            background-color: #eaffea;
+            color: #55a532;
+        }
+
+        .pl-mdr {
+            color: #795da3;
+            font-weight: bold;
+        }
+
+        .pl-mo {
+            color: #1d3e81;
+        }
+        .task-list {
+            padding-left:10px;
+            margin-bottom:0;
+        }
+
+        .task-list li {
+            margin-left: 20px;
+        }
+
+        .task-list-item {
+            list-style-type:none;
+            padding-left:10px;
+        }
+
+        .task-list-item label {
+            font-weight:400;
+        }
+
+        .task-list-item.enabled label {
+            cursor:pointer;
+        }
+
+        .task-list-item+.task-list-item {
+            margin-top:3px;
+        }
+
+        .task-list-item-checkbox {
+            display:inline-block;
+            margin-left:-20px;
+            margin-right:3px;
+            vertical-align:1px;
+        }
+
+        .hljs {
+            background: transparent;
+        }
+
+        strong{
+            color: #6F6F6F;
+            padding-left: 5px;
+        }
+    </style>
+
+
+
+
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+<p><img src="http://multiscreen.samsung.com/downloads/msf-logo.png" alt=""></p>
+<h1 id="api-documentation">API Documentation</h1>
+<dl>
+<dt><a href="#module_msf">msf</a></dt>
+<dt><a href="#Service">Service</a></dt>
+<dt><a href="#Search">Search</a> ⇐ <code><a href="#EventEmitter">EventEmitter</a></code></dt>
+<dt><a href="#Application">Application</a> ⇐ <code><a href="#Channel">Channel</a></code></dt>
+<dt><a href="#Channel">Channel</a> ⇐ <code><a href="#EventEmitter">EventEmitter</a></code></dt>
+<dt><a href="#ClientList">ClientList</a> ⇐ <code>Array</code></dt>
+<dt><a href="#Client">Client</a></dt>
+<dt><a href="#EventEmitter">EventEmitter</a></dt>
+</dl>
+
+
+<p><a name="module_msf"></a></p>
+<h2 id="msf">msf</h2>
+<p>The &#39;msf&#39; module/object is the entry point for the API.
+If including the library via script tag it will be a global object attached to the window
+or the export of the module if using amd/commonjs (requirejs/browserify)</p>
+<ul>
+<li><a href="#module_msf">msf</a><ul>
+<li><a href="#module_msf.search">.search([callback])</a> ⇒ <code><a href="#Search">Search</a></code></li>
+<li><a href="#module_msf.local">.local(callback)</a></li>
+<li><a href="#module_msf.remote">.remote(uri, callback)</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="module_msf.search"></a></p>
+<h4 id="msf-search-callback-code-search-search-code-">msf.search([callback]) ⇒ <code><a href="#Search">Search</a></code></h4>
+<p>Searches the local network for compatible multiscreen services</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>[callback] <code>function</code> - If a callback is passed the search is immediately started.  <ul>
+<li>err <code>Error</code> - The callback handler  </li>
+<li>result <code><a href="#Service">Array.&lt;Service&gt;</a></code> - An array of <a href="#Service">Service</a> instances found on the network  </li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>: <code><a href="#Search">Search</a></code> - A search instance (a singleton is used to reduce page resources)  </p>
+<pre><code class="lang-js">msf.search(function(err, services){
+  if(err) return console.error(&#39;something went wrong&#39;, err.message);
+  console.log(&#39;found &#39;+services.length+&#39; services&#39;);
+}
+
+// OR
+
+var search = msf.search();
+search.on(&#39;found&#39;, function(service){
+   console.log(&#39;found service &#39;+service.name);
+}
+search.start();
+</code></pre>
+<p><a name="module_msf.local"></a></p>
+<h4 id="msf-local-callback-">msf.local(callback)</h4>
+<p>Retrieves a reference to the service running on the current device. This is typically only used on the &#39;host&#39; device.</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>callback <code>function</code> - The callback handler  <ul>
+<li>error <code>Error</code>  </li>
+<li>service <code><a href="#Service">Service</a></code> - The service instance  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">msf.local(function(err, service){
+  console.log(&#39;my service name is &#39;+service.name);
+}
+</code></pre>
+<p><a name="module_msf.remote"></a></p>
+<h4 id="msf-remote-uri-callback-">msf.remote(uri, callback)</h4>
+<p>Retrieves a service instance by it&#39;s uri</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>uri <code>String</code> - The uri of the service (<a href="http://host:port/api/v2/">http://host:port/api/v2/</a>)  </li>
+<li>callback <code>function</code> - The callback handler  <ul>
+<li>error <code>Error</code>  </li>
+<li>service <code><a href="#Service">Service</a></code> - The service instance  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">msf.remote(&#39;http://host:port/api/v2/&#39;,function(err, service){
+  console.log(&#39;the service name is &#39;+service.name);
+}
+</code></pre>
+<p><a name="Service"></a></p>
+<h2 id="service">Service</h2>
+<p>A Service instance represents the multiscreen service running on the remote device, such as a SmartTV</p>
+<ul>
+<li><a href="#Service">Service</a><ul>
+<li><em>instance</em><ul>
+<li><a href="#Service#id">.id</a> → <code>String</code></li>
+<li><a href="#Service#name">.name</a> → <code>String</code></li>
+<li><a href="#Service#version">.version</a> → <code>String</code></li>
+<li><a href="#Service#type">.type</a> → <code>String</code></li>
+<li><a href="#Service#uri">.uri</a> → <code>String</code></li>
+<li><a href="#Service#device">.device</a> → <code>String</code></li>
+<li><a href="#Service#application">.application(id, channelUri)</a> ⇒ <code><a href="#Application">Application</a></code></li>
+<li><a href="#Service#channel">.channel(uri)</a> ⇒ <code><a href="#Channel">Channel</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="Service#id"></a></p>
+<h4 id="service-id-code-string-code-">service.id → <code>String</code></h4>
+<p>The id of the service</p>
+<p><!--<code>readonly</code>--><a name="Service#name"></a></p>
+<h4 id="service-name-code-string-code-">service.name → <code>String</code></h4>
+<p>The name of the service (Living Room TV)</p>
+<p><!--<code>readonly</code>--><a name="Service#version"></a></p>
+<h4 id="service-version-code-string-code-">service.version → <code>String</code></h4>
+<p>The version of the service (x.x.x)</p>
+<p><!--<code>readonly</code>--><a name="Service#type"></a></p>
+<h4 id="service-type-code-string-code-">service.type → <code>String</code></h4>
+<p>The type of the service (Samsung SmartTV)</p>
+<p><!--<code>readonly</code>--><a name="Service#uri"></a></p>
+<h4 id="service-uri-code-string-code-">service.uri → <code>String</code></h4>
+<p>The uri of the service (http://<ip>:<port>/api/v2/)</p>
+<p><!--<code>readonly</code>--><a name="Service#device"></a></p>
+<h4 id="service-device-code-string-code-">service.device → <code>String</code></h4>
+<p>A hash of additional information about the device the service is running on</p>
+<p><!--<code>readonly</code>--><a name="Service#application"></a></p>
+<h4 id="service-application-id-channeluri-code-application-application-code-">service.application(id, channelUri) ⇒ <code><a href="#Application">Application</a></code></h4>
+<p>Creates <a href="#Application">Application</a> instances belonging to that service</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>id <code>String</code> - An installed application id or url of the web application  </li>
+<li>channelUri <code>String</code> - The URI of the channel to connect to.  </li>
+</ul>
+<pre><code class="lang-js">var application = service.application(&#39;http://mydomain/myapp/&#39;, &#39;com.mydomain.myapp&#39;);
+</code></pre>
+<p><a name="Service#channel"></a></p>
+<h4 id="service-channel-uri-code-channel-channel-code-">service.channel(uri) ⇒ <code><a href="#Channel">Channel</a></code></h4>
+<p>creates a channel of the service (&#39;mychannel&#39;)</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>uri <code>String</code> - The uri of the Channel  </li>
+</ul>
+<pre><code class="lang-js">var channel = service.channel(&#39;com.mydomain.myapp&#39;);
+</code></pre>
+<p><a name="Search"></a></p>
+<h2 id="search-code-eventemitter-eventemitter-code-">Search ⇐ <code><a href="#EventEmitter">EventEmitter</a></code></h2>
+<p>Provides members related to <a href="#Service">Service</a> discovery.</p>
+<p><strong>Extends:</strong> <code><a href="#EventEmitter">EventEmitter</a></code>  </p>
+<ul>
+<li><a href="#Search">Search</a> ⇐ <code><a href="#EventEmitter">EventEmitter</a></code><ul>
+<li><em>instance</em><ul>
+<li><a href="#Search#start">.start()</a></li>
+<li><a href="#Search#stop">.stop()</a></li>
+</ul>
+</li>
+<li><em>inherits</em><ul>
+<li><a href="#EventEmitter#on">.on(type, listener)</a>  </li>
+<li><a href="#EventEmitter#once">.once(type, listener)</a>  </li>
+<li><a href="#EventEmitter#off">.off(type, listener)</a>  </li>
+<li><a href="#EventEmitter#removeAllListeners">.removeAllListeners(event)</a>  </li>
+</ul>
+</li>
+<li><em>events</em><ul>
+<li><a href="#Search#event_found">&quot;found&quot;</a></li>
+<li><a href="#Search#event_error">&quot;error&quot;</a></li>
+<li><a href="#Search#event_start">&quot;start&quot;</a></li>
+<li><a href="#Search#event_stop">&quot;stop&quot;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="Search#start"></a></p>
+<h4 id="search-start-">search.start()</h4>
+<p>Starts the search, looking for devices it can reach on the network
+If a search is already in progress it will NOT begin a new search</p>
+<pre><code class="lang-js">var search = msf.search();
+search.on(&#39;found&#39;, function(service){
+   console.log(&#39;found service &#39;+service.name);
+}
+search.start();
+</code></pre>
+<p><a name="Search#stop"></a></p>
+<h4 id="search-stop-">search.stop()</h4>
+<p>Stops the current search in progress (no &#39;found&#39; events or search callbacks will fire)</p>
+<pre><code class="lang-js">search.stop();
+</code></pre>
+<p><a name="Search#event_found"></a></p>
+<h4 id="event-found-">event: &quot;found&quot;</h4>
+<p>Fired when a search has discovered compatible services</p>
+<pre><code class="lang-js">search.on(&#39;found&#39;, function(service){
+   console.log(&#39;found &#39;+service.name);
+});
+</code></pre>
+<p><a name="Search#event_error"></a></p>
+<h4 id="event-error-">event: &quot;error&quot;</h4>
+<p>Fired when a search error has occurred</p>
+<pre><code class="lang-js">search.on(&#39;error&#39;, function(err){
+   console.error(&#39;something went wrong&#39;, err.message);
+});
+</code></pre>
+<p><a name="Search#event_start"></a></p>
+<h4 id="event-start-">event: &quot;start&quot;</h4>
+<p>Fired when a search has been started</p>
+<pre><code class="lang-js">search.on(&#39;start&#39;, function(){
+   ui.setState(&#39;searching&#39;);
+});
+</code></pre>
+<p><a name="Search#event_stop"></a></p>
+<h4 id="event-stop-">event: &quot;stop&quot;</h4>
+<p>Fired when a search has been stopped</p>
+<pre><code class="lang-js">search.on(&#39;stop&#39;, function(){
+   ui.setState(&#39;stopped&#39;);
+});
+</code></pre>
+<p><a name="Application"></a></p>
+<h2 id="application-code-channel-channel-code-">Application ⇐ <code><a href="#Channel">Channel</a></code></h2>
+<p>An Application represents an application on the remote device.
+Use the class to control various aspects of the application such launching the app or getting information</p>
+<p><strong>Extends:</strong> <code><a href="#Channel">Channel</a></code>  </p>
+<ul>
+<li><a href="#Application">Application</a> ⇐ <code><a href="#Channel">Channel</a></code><ul>
+<li><em>instance</em><ul>
+<li><a href="#Application#id">.id</a> → <code>String</code></li>
+<li><a href="#Application#install">.install(callback)</a></li>
+</ul>
+</li>
+<li><em>overrides</em><ul>
+<li><a href="#Application#connect">.connect(attributes, callback)</a></li>
+<li><a href="#Application#disconnect">.disconnect([exitOnRemote], [callback])</a></li>
+</ul>
+</li>
+<li><em>inherits</em><ul>
+<li><a href="#Channel#clients">.clients</a> → <code><a href="#ClientList">ClientList</a></code></li>
+<li><a href="#Channel#isConnected">.isConnected</a> → <code>Boolean</code></li>
+<li><a href="#Channel#connectionTimeout">.connectionTimeout</a> → <code>Boolean</code></li>
+<li><a href="#Channel#publish">.publish(event, [message], [target], [payload])</a></li>
+<li><a href="#EventEmitter#on">.on(type, listener)</a>  </li>
+<li><a href="#EventEmitter#once">.once(type, listener)</a>  </li>
+<li><a href="#EventEmitter#off">.off(type, listener)</a>  </li>
+<li><a href="#EventEmitter#removeAllListeners">.removeAllListeners(event)</a>  </li>
+<li><a href="#Channel#event_connect">&quot;connect&quot; (client)</a></li>
+<li><a href="#Channel#event_disconnect">&quot;disconnect&quot; (client)</a></li>
+<li><a href="#Channel#event_clientConnect">&quot;clientConnect&quot; (client)</a></li>
+<li><a href="#Channel#event_clientDisconnect">&quot;clientDisconnect&quot; (client)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="Application#id"></a></p>
+<h4 id="application-id-code-string-code-">application.id → <code>String</code></h4>
+<p>The id of the application (this can be a url or installed application id)</p>
+<p><!--<code>readonly</code>--><a name="Application#connect"></a></p>
+<h4 id="application-connect-attributes-callback-">application.connect(attributes, callback)</h4>
+<p>Starts and connects to the application on the remote device. Similar to the Channel &#39;connect&#39; method but
+within an Application the &#39;connect&#39; callback and event will be only be called when the remote application has
+launched and is ready to receive messages.</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>attributes <code>Object</code> - Any attributes to attach to your client  </li>
+<li>callback <code>function</code> - The callback handler  <ul>
+<li>error <code>Error</code> - Any error that may have occurred during the connection or application startup  </li>
+<li>client <code><a href="#Client">Client</a></code> - Your client object  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">app.connect({displayName:&#39;Wheezy&#39;},function(err, client){
+  if(err) return console.error(&#39;something went wrong : &#39;, error.code, error.message);
+  console.info(&#39;You are now connected&#39;);
+});
+</code></pre>
+<p><a name="Application#disconnect"></a></p>
+<h4 id="application-disconnect-exitonremote-callback-">application.disconnect([exitOnRemote], [callback])</h4>
+<p>Disconnects your client from the remote application.
+If the first argument is an optional param and can be used close the remote application
+The stop/exit command is only sent if you are the last connected client</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>[exitOnRemote=<code>true</code>] <code>Boolean</code> - Issues a stop/exit on the remote application before disconnecting  </li>
+<li>[callback] <code>function</code> - The callback handler  <ul>
+<li>error <code>Error</code> - Any error that may have occurred during the connection or application startup  </li>
+<li>client <code><a href="#Client">Client</a></code> - Your client object  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">app.disconnect(function(err){
+    if(err) return console.error(&#39;something went wrong&#39;);
+    console.info(&#39;You are now disconnected&#39;);
+});
+</code></pre>
+<p><a name="Application#install"></a></p>
+<h4 id="application-install-callback-">application.install(callback)</h4>
+<p>Installs the application on the remote device.</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>callback <code>function</code> - The callback handler  <ul>
+<li>err <code>function</code> - The callback handler  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">app.connect({name:&#39;Jason&#39;}, function(err, client){
+   if(err.code === 404){
+     var install = confirm(&#39;Would you like to install the MyApp on your TV?&#39;);
+     if(install){
+        app.install(function(err){
+           alert(&#39;Please follow the prompts on your TV to install the application&#39;);
+        });
+    }
+  }
+ });
+</code></pre>
+<p><a name="Channel"></a></p>
+<h2 id="channel-code-eventemitter-eventemitter-code-">Channel ⇐ <code><a href="#EventEmitter">EventEmitter</a></code></h2>
+<p>A Channel is a discreet connection where multiple clients can communicate</p>
+<p><strong>Extends:</strong> <code><a href="#EventEmitter">EventEmitter</a></code>  </p>
+<ul>
+<li><a href="#Channel">Channel</a> ⇐ <code><a href="#EventEmitter">EventEmitter</a></code><ul>
+<li><em>instance</em><ul>
+<li><a href="#Channel#clients">.clients</a> → <code><a href="#ClientList">ClientList</a></code></li>
+<li><a href="#Channel#isConnected">.isConnected</a> → <code>Boolean</code></li>
+<li><a href="#Channel#connectionTimeout">.connectionTimeout</a> → <code>Boolean</code></li>
+<li><a href="#Channel#connect">.connect(attributes, callback)</a></li>
+<li><a href="#Channel#disconnect">.disconnect(callback)</a></li>
+<li><a href="#Channel#publish">.publish(event, [message], [target], [payload])</a></li>
+</ul>
+</li>
+<li><em>inherits</em><ul>
+<li><a href="#EventEmitter#on">.on(type, listener)</a>  </li>
+<li><a href="#EventEmitter#once">.once(type, listener)</a>  </li>
+<li><a href="#EventEmitter#off">.off(type, listener)</a>  </li>
+<li><a href="#EventEmitter#removeAllListeners">.removeAllListeners(event)</a>  </li>
+</ul>
+</li>
+<li><em>events</em><ul>
+<li><a href="#Channel#event_connect">&quot;connect&quot; (client)</a></li>
+<li><a href="#Channel#event_disconnect">&quot;disconnect&quot; (client)</a></li>
+<li><a href="#Channel#event_clientConnect">&quot;clientConnect&quot; (client)</a></li>
+<li><a href="#Channel#event_clientDisconnect">&quot;clientDisconnect&quot; (client)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="Channel#clients"></a></p>
+<h4 id="channel-clients-code-clientlist-clientlist-code-">channel.clients → <code><a href="#ClientList">ClientList</a></code></h4>
+<p>The collection of clients currently connected to the channel</p>
+<p><!--<code>readonly</code>--><a name="Channel#isConnected"></a></p>
+<h4 id="channel-isconnected-code-boolean-code-">channel.isConnected → <code>Boolean</code></h4>
+<p>The connection status of the channel</p>
+<p><!--<code>readonly</code>--><a name="Channel#connectionTimeout"></a></p>
+<h4 id="channel-connectiontimeout-code-boolean-code-">channel.connectionTimeout → <code>Boolean</code></h4>
+<p>Sets the connection timeout. When set the channel will utilize a connection health check while connected.
+If no pinging health check is not received within the given timeout the connection will close.
+To stop the health check set the timeout to 0</p>
+<pre><code class="lang-js">channel.connectionTimeout = 10000; // checks the connection every 10 seconds while connected
+channel.connectionTimeout = 0; // stops the health check
+</code></pre>
+<p><a name="Channel#connect"></a></p>
+<h4 id="channel-connect-attributes-callback-">channel.connect(attributes, callback)</h4>
+<p>Connects to the channel</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>attributes <code>Object</code> - Any attributes you want to associate with the client (ie. {name:&quot;FooBar&quot;}  </li>
+<li>callback <code>function</code> - The success callback handler  <ul>
+<li>arg1 <code>Error</code> - Any error that may have occurred  </li>
+<li>arg2 <code><a href="#Client">Client</a></code> - The connecting client  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">channel.connect({name:&#39;Wheezy&#39;},function(err, client){
+  if(err) return console.error(&#39;something went wrong : &#39;, error.code, error.message);
+  console.info(client.attributes.name+&#39;, you are now connected&#39;);
+});
+</code></pre>
+<p><a name="Channel#disconnect"></a></p>
+<h4 id="channel-disconnect-callback-">channel.disconnect(callback)</h4>
+<p>Disconnects from the channel</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>callback <code>function</code> - The success callback handler  <ul>
+<li>error <code>Error</code> - Any error that may have occurred  </li>
+<li>client <code><a href="#Client">Client</a></code> - The disconnecting client  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-js">channel.disconnect(function(err, client){
+  if(err) return console.error(&#39;something went wrong : &#39;, error.code, error.message);
+  console.info(client.attributes.name+&#39;, you are now disconnected&#39;);
+});
+</code></pre>
+<p><a name="Channel#publish"></a></p>
+<h4 id="channel-publish-event-message-target-payload-">channel.publish(event, [message], [target], [payload])</h4>
+<p>Publish an event message to the specified target or targets.
+Targets can be in the for of a clients id, an array of client ids or one of the special message target strings (ie. &quot;all&quot; or &quot;host&quot;}</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>event <code>String</code> - The name of the event to emit  </li>
+<li>[message] <code>any</code> - Any data associated with the event  </li>
+<li>[target=<code>&#x27;broadcast&#x27;</code>] <code>String</code> | <code>Array</code> - The target recipient(s) of the message  </li>
+<li>[payload] <code>Blob</code> | <code>ArrayBuffer</code> - Any binary data to send with the message  </li>
+</ul>
+<pre><code class="lang-js">channel.publish(&#39;myCustomEventName&#39;,{custom:&#39;data&#39;});
+</code></pre>
+<p><a name="Channel#event_connect"></a></p>
+<h4 id="event-connect-client-">event: &quot;connect&quot; (client)</h4>
+<p>Fired when a channel makes a connection</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>client <code><a href="#Client">Client</a></code> - Your client  </li>
+</ul>
+<pre><code class="lang-js">channel.on(&#39;connect&#39;,function(client){
+ console.log(&#39;You are now connected&#39;);
+});
+</code></pre>
+<p><a name="Channel#event_disconnect"></a></p>
+<h4 id="event-disconnect-client-">event: &quot;disconnect&quot; (client)</h4>
+<p>Fired when a channel disconnects</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>client <code><a href="#Client">Client</a></code> - Your client  </li>
+</ul>
+<pre><code class="lang-js">channel.on(&#39;disconnect&#39;,function(client){
+ console.log(&#39;You are now disconnected&#39;);
+});
+</code></pre>
+<p><a name="Channel#event_clientConnect"></a></p>
+<h4 id="event-clientconnect-client-">event: &quot;clientConnect&quot; (client)</h4>
+<p>Fired when a peer client channel makes a connection</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>client <code><a href="#Client">Client</a></code> - The client that connected  </li>
+</ul>
+<pre><code class="lang-js">channel.on(&#39;clientConnect&#39;,function(client){
+ console.log(client.id + &#39;is now connected&#39;);
+});
+</code></pre>
+<p><a name="Channel#event_clientDisconnect"></a></p>
+<h4 id="event-clientdisconnect-client-">event: &quot;clientDisconnect&quot; (client)</h4>
+<p>Fired when a peer client disconnects</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>client <code><a href="#Client">Client</a></code> - The client that connected  </li>
+</ul>
+<pre><code class="lang-js">channel.on(&#39;clientDisconnect&#39;,function(client){
+ console.log(client.id + &#39;has disconnected&#39;);
+});
+</code></pre>
+<p><a name="ClientList"></a></p>
+<h2 id="clientlist-code-array-code-">ClientList ⇐ <code>Array</code></h2>
+<p>A list of <a href="#Client">clients</a> accessible through <a href="#Channel#clients">channel.clients</a>.
+This list is managed by the channel and automatically adds and removes clients as they connect and disconnect</p>
+<p><strong>Extends:</strong> <code>Array</code>  </p>
+<ul>
+<li><a href="#ClientList">ClientList</a> ⇐ <code>Array</code><ul>
+<li><em>instance</em><ul>
+<li><a href="#ClientList#me">.me</a> → <code><a href="#Client">Client</a></code></li>
+<li><a href="#ClientList#getById">.getById(id)</a> ⇒ <code><a href="#Client">Client</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="ClientList#me"></a></p>
+<h4 id="clientlist-me-code-client-client-code-">clientList.me → <code><a href="#Client">Client</a></code></h4>
+<p>A reference to your client</p>
+<p><!--<code>readonly</code>--><a name="ClientList#getById"></a></p>
+<h4 id="clientlist-getbyid-id-code-client-client-code-">clientList.getById(id) ⇒ <code><a href="#Client">Client</a></code></h4>
+<p>Returns a client by id</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>id <code>String</code> - The client  </li>
+</ul>
+<p><a name="Client"></a></p>
+<h2 id="client">Client</h2>
+<p>A representation of an individual device or user connected to a channel.
+Clients can have user defined attributes that are readable by all other clients.</p>
+<ul>
+<li><a href="#Client">Client</a><ul>
+<li><em>instance</em><ul>
+<li><a href="#Client#id">.id</a> → <code>String</code></li>
+<li><a href="#Client#attributes">.attributes</a> → <code>Object</code></li>
+<li><a href="#Client#isHost">.isHost</a> → <code>Boolean</code></li>
+<li><a href="#Client#connectTime">.connectTime</a> → <code>Number</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="Client#id"></a></p>
+<h4 id="client-id-code-string-code-">client.id → <code>String</code></h4>
+<p>The id of the client</p>
+<p><!--<code>readonly</code>--><a name="Client#attributes"></a></p>
+<h4 id="client-attributes-code-object-code-">client.attributes → <code>Object</code></h4>
+<p>A map of attributes passed by the client when connecting</p>
+<p><!--<code>readonly</code>--><a name="Client#isHost"></a></p>
+<h4 id="client-ishost-code-boolean-code-">client.isHost → <code>Boolean</code></h4>
+<p>Flag for determining if the client is the host</p>
+<p><!--<code>readonly</code>--><a name="Client#connectTime"></a></p>
+<h4 id="client-connecttime-code-number-code-">client.connectTime → <code>Number</code></h4>
+<p>The time which the client connected in epoch milliseconds</p>
+<p><!--<code>readonly</code>--><a name="EventEmitter"></a></p>
+<h2 id="eventemitter">EventEmitter</h2>
+<p>All objects which emit events are instances of EventEmitter.
+The EventEmitter class is derived from the nodejs EventEmitter.</p>
+<p>For simplicity only the most used members are documented here, for full documentation read <a href="http://nodejs.org/api/events.html">http://nodejs.org/api/events.html</a></p>
+<ul>
+<li><a href="#EventEmitter">EventEmitter</a><ul>
+<li><em>instance</em><ul>
+<li><a href="#EventEmitter#on">.on(type, listener)</a>  </li>
+<li><a href="#EventEmitter#once">.once(type, listener)</a>  </li>
+<li><a href="#EventEmitter#off">.off(type, listener)</a>  </li>
+<li><a href="#EventEmitter#removeAllListeners">.removeAllListeners(event)</a>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a name="EventEmitter#on"></a></p>
+<h4 id="eventemitter-on-type-listener-">eventEmitter.on(type, listener)</h4>
+<p>Adds a listener for the event.</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>type <code>String</code> - The event name to listen to  </li>
+<li>listener <code>function</code> - The function to invoke when the event occurs  </li>
+</ul>
+<p><strong>Returns</strong>: EventEmitter<br><a name="EventEmitter#once"></a></p>
+<h4 id="eventemitter-once-type-listener-">eventEmitter.once(type, listener)</h4>
+<p>Adds a one time listener for the event. This listener is invoked only the next time the event is fired, after which it is removed.</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>type <code>String</code> - The event name to listen to  </li>
+<li>listener <code>function</code> - The function to invoke when the event occurs  </li>
+</ul>
+<p><strong>Returns</strong>: EventEmitter<br><a name="EventEmitter#off"></a></p>
+<h4 id="eventemitter-off-type-listener-">eventEmitter.off(type, listener)</h4>
+<p>Alias for removeListener</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>type <code>String</code> - The event name to stop listening to  </li>
+<li>listener <code>function</code> - The function that was originally add to handle the event  </li>
+</ul>
+<p><strong>Returns</strong>: EventEmitter<br><a name="EventEmitter#removeAllListeners"></a></p>
+<h4 id="eventemitter-removealllisteners-event-">eventEmitter.removeAllListeners(event)</h4>
+<p>Removes all listeners, or those of the specified event.</p>
+<p><strong>Params</strong></p>
+<ul>
+<li>event <code>String</code> - The event name to stop listening to  </li>
+</ul>
+<p><strong>Returns</strong>: EventEmitter  </p>
+
+
+<script>
+
+    $(function(){
+
+        var tocContent = $('dl');
+        var toc = $('<div>',{id:'toc'});
+        var nav = $('<nav>',{id:'nav'});
+        toc.append(tocContent);
+        nav.append(toc);
+
+        var docContent = $('body').children();
+        var content = $('<div>',{id:'content'});
+        content.append(docContent);
+
+        var footer = $('<div>',{id:'footer'});
+
+        $('body').append(content);
+        $('body').append(nav);
+        $('body').append(footer);
+
+
+    });
+
+</script>
+
+</body>
+</html>
+

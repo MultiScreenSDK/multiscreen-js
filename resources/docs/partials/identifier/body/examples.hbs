@@ -1,0 +1,21 @@
+{{#if examples}}{{#each examples}}
+{{#if (regexp-test this "```")}}{{{linkify this}}}
+{{else~}}
+
+{{#if (optionIsSet "example-lang")~}}
+{{#if (optionEquals "example-lang" "none")~}}
+```
+{{{linkify this}}}
+```
+{{else~}}
+```{{option "example-lang"}}
+{{{linkify this}}}
+```
+{{/if~}}
+{{else~}}
+{{{linkify this}}}
+
+{{/if~}}
+
+{{/if~}}
+{{/each}}{{/if~}}

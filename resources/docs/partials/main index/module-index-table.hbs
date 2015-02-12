@@ -1,0 +1,8 @@
+{{#modules~}}
+{{#if @first~}}
+{{>heading-indent}}Modules
+| Module | Description |
+| ------ | ----------- |
+{{/if~}}
+| {{#if deprecated}}~~{{/if}}[{{>index-name2}}](#{{{anchorName}}}){{>return-sig}}{{>name-suffix~}}{{#if deprecated}}~~{{/if}} | {{{stripNewlines (linkify description)}}} |
+{{/modules}}

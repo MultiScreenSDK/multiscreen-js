@@ -1,0 +1,20 @@
+{{fixClass}}
+{{#if (showMainIndex)~}}
+![](http://multiscreen.samsung.com/downloads/msf-logo.png)
+# API Documentation
+
+<dl>
+{{#if (optionEquals "module-index-format" "dl")}}{{>module-index-dl ~}}{{/if~}}
+{{#if (optionEquals "module-index-format" "list")}}{{>module-index-list ~}}{{/if~}}
+{{#if (optionEquals "module-index-format" "table")}}{{>module-index-table ~}}{{/if~}}
+{{#if (optionEquals "global-index-format" "dl")}}{{>global-index-dl ~}}{{/if~}}
+{{#if (optionEquals "global-index-format" "list")}}{{>global-index-list ~}}{{/if~}}
+{{#if (optionEquals "global-index-format" "table")}}{{>global-index-table ~}}{{/if~}}
+</dl>
+
+
+{{/if~}}
+
+{{#orphans sortBy=(option "sort-by")~}}
+{{>docs~}}
+{{/orphans~}}
